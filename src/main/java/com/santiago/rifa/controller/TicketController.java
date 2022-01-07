@@ -32,7 +32,13 @@ public class TicketController {
     private TicketService service;
     @GetMapping("/all")
     public List<Ticket> list() {
-        return service.getAll();
+        List <Ticket> lista =service.getAll();  
+        lista.forEach((ticket)->{
+            if(ticket.getPerson()!=null){
+                ticket.setPerson(null);
+            }
+        });
+        return lista;
     }
     @GetMapping("/Person/{id}")
     public List<Ticket> listByPerson(@PathVariable("id") Long id) {
